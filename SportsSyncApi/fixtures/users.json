@@ -1,0 +1,110 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$skKMaZQjJwGMIJO1MmeaoP$68b2U4VFPL1ZQYgYmM7sIJUWPDhKCrAJOrdz4MWnLq4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "mickey@disney.com",
+      "first_name": "Mickey",
+      "last_name": "Mouse",
+      "email": "mickey@disney.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-05-15T10:30:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$6caQGznxTT5xOWckvjT6QO$YZTdqhVzw5XIXUcA2TrQsZuC4SJGBeFc2OYOIz6j8Lk=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "elsa@disney.com",
+      "first_name": "Elsa",
+      "last_name": "Arendelle",
+      "email": "elsa@disney.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-06-22T14:45:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$NKseENHvY06F1AIu2RdtPX$mEuwkQRhvscNYW9ORA68BddrY96oVevnyLz6szhmrO4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "simba@disney.com",
+      "first_name": "Simba",
+      "last_name": "PrideRock",
+      "email": "simba@disney.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-07-30T09:15:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$d3OTZFUe5DZje6Kb6rm7zv$5oKmFOAQ2WtJQJ+FCT4tXnkbsL60zQN0OTM4nPQQ69A=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ariel@disney.com",
+      "first_name": "Ariel",
+      "last_name": "Triton",
+      "email": "ariel@disney.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-08-18T16:20:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$L9WyeeE95squbRZelePsZf$XayBzPujv5CeAnmIzcLL0orBqE3qDpJLuQsy9zOM5rc=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "belle@disney.com",
+      "first_name": "Belle",
+      "last_name": "French",
+      "email": "belle@disney.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-09-05T11:30:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$iU8LQX1Y1DxUjhddsV7FR7$AAvT4VAaY7v7hiOGX8/rnuoAkZnj1joW5WOt6kbGC9Q=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "buzz@disney.com",
+      "first_name": "Buzz",
+      "last_name": "Lightyear",
+      "email": "buzz@disney.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-10-10T13:45:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
