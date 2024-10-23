@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class SportssyncapiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'sportssyncapi'
+    name = 'SportsSyncApi'

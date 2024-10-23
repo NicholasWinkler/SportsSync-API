@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'raterapi',
+    'SportsSyncApi',
 ]
 
 REST_FRAMEWORK = {
@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'sportssyncproject.urls'
+ROOT_URLCONF = 'SportsSyncProject.urls'
 
 TEMPLATES = [
     {
@@ -78,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sportssyncproject.wsgi.application'
+WSGI_APPLICATION = 'SportsSyncProject.wsgi.application'
 
 
 # Database
