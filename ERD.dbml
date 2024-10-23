@@ -1,0 +1,68 @@
+Table users {
+  id int [pk, increment]
+  username varchar
+  email varchar [unique]
+  password varchar
+  created_at timestamp
+}
+
+Table players {
+  id int [pk, increment]
+  name varchar
+  position varchar
+  team_id int
+  points_per_game float
+  assists_per_game float
+  rebounds_per_game float
+}
+
+Table teams {
+  id int [pk, increment]
+  name varchar
+  city varchar
+  wins int
+  losses int
+}
+
+Table games {
+  id int [pk, increment]
+  home_team_id int
+  away_team_id int
+  date datetime
+  home_team_score int
+  away_team_score int
+}
+
+Table user_favorites {
+  user_id int
+  favorite_type varchar // either "player" or "team"
+  favorite_id int
+}
+
+// Stretch Goal: For Favorite News Articles
+Table news_articles {
+  id int [pk, increment]
+  title varchar
+  content text
+  published_date datetime
+}
+
+Table user_saved_articles { // Stretch Goal: To save favorite news articles
+  user_id int
+  article_id int
+}
+
+Table team_followers {
+  user_id int
+  team_id int
+}
+
+// Relationships
+Ref: players.team_id > teams.id
+Ref: games.home_team_id > teams.id
+Ref: games.away_team_id > teams.id
+Ref: user_favorites.user_id > users.id
+Ref: user_saved_articles.user_id > users.id
+Ref: user_saved_articles.article_id > news_articles.id
+Ref: team_followers.user_id > users.id
+Ref: team_followers.team_id > teams.id
