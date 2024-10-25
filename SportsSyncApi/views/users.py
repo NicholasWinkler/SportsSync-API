@@ -11,8 +11,11 @@ from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'first_name', 'last_name']
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ['id', 'email', 'password', 'first_name', 'last_name']
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'username': {'required': False}  # Make username optional
+        }
 
 
 class UserViewSet(viewsets.ViewSet):
@@ -24,24 +27,35 @@ class UserViewSet(viewsets.ViewSet):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = User.objects.create_user(
-                username=serializer.validated_data['username'],
+                username=serializer.validated_data['email'],  # Using email as username
+                email=serializer.validated_data['email'],
                 first_name=serializer.validated_data['first_name'],
                 last_name=serializer.validated_data['last_name'],
                 password=serializer.validated_data['password']
             )
             token, created = Token.objects.get_or_create(user=user)
             return Response({"token": token.key}, status=status.HTTP_201_CREATED)
+
+        # Log the errors to the console
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['post'], url_path='login')
     def user_login(self, request):
-        username = request.data.get('username')
+        email = request.data.get('email')
         password = request.data.get('password')
 
-        user = authenticate(username=username, password=password)
+        # Fetch the user by email and then authenticate by password
+        try:
+           user = User.objects.get(email=email)
+        except User.DoesNotExist:
+           return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Authenticate using username and password
+        user = authenticate(username=user.username, password=password)
 
         if user:
-            token = Token.objects.get(user=user)
+            token, _ = Token.objects.get_or_create(user=user)
             return Response({'token': token.key}, status=status.HTTP_200_OK)
         else:
-            return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+           return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
