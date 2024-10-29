@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders',  # Make sure this is here
+    'corsheaders',
     'SportsSyncApi',
 ]
 
@@ -36,7 +36,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
-    # Removed permission classes to allow public access to the news API
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
 }
 
 # CORS settings
@@ -135,3 +138,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # News API key
 NEWS_API_KEY = '2e72051e36f041af95d98034f67bd0b6'
+
+# Cache settings for NBA API
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'nba-stats-cache',
+        'TIMEOUT': 300,  # 5 minutes cache
+    }
+}

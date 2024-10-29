@@ -1,47 +1,35 @@
-# apps/nba/views/dashboard.py
-from urllib.request import urlopen
-import json
-from datetime import datetime
-from django.http import JsonResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .games import GamesAPI
+from .players import PlayersAPI
+from .teams import TeamsAPI
 
-def get_standings(request):
-    """Get NBA standings data"""
-    try:
-        with urlopen("https://www.balldontlie.io/api/v1/teams") as response:
-            data = json.loads(response.read().decode())
-        return JsonResponse(data)
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
-
-def search(request):
-    """Search players and teams"""
-    query = request.GET.get('q', '')
-    try:
-        results = []
-        if query:
-            # Search players
-            with urlopen(f"https://www.balldontlie.io/api/v1/players?search={query}") as players_response:
-                players_data = json.loads(players_response.read().decode())
-                
-            # Search teams
-            with urlopen(f"https://www.balldontlie.io/api/v1/teams?search={query}") as teams_response:
-                teams_data = json.loads(teams_response.read().decode())
+class NBAHomeView(APIView):
+    def get(self, request):
+        try:
+            # Get data from each API
+            games_data = GamesAPI.get_games()
+            player_data = PlayersAPI.get_player_of_week()
+            standings_data = TeamsAPI.get_standings()
             
-            # Format results
-            for player in players_data.get('data', []):
-                results.append({
-                    'id': player['id'],
-                    'name': player['first_name'] + ' ' + player['last_name'],
-                    'type': 'Player'
-                })
+            response_data = {
+                'games': games_data,  # This now includes live_games, upcoming_games, and recent_games
+                'player_of_week': player_data,
+                'standings': standings_data
+            }
             
-            for team in teams_data.get('data', []):
-                results.append({
-                    'id': team['id'],
-                    'name': team['full_name'],
-                    'type': 'Team'
-                })
-            
-        return JsonResponse(results, safe=False)
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+            return Response(response_data)
+        except Exception as e:
+            print(f"Dashboard error: {str(e)}")
+            return Response({
+                'games': {
+                    'live_games': [],
+                    'upcoming_games': [],
+                    'recent_games': []
+                },
+                'player_of_week': None,
+                'standings': {
+                    'east': [],
+                    'west': []
+                }
+            })
