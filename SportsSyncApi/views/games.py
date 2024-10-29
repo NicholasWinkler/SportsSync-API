@@ -23,8 +23,8 @@ class GamesAPI:
                     game_data = {
                         'id': game['gameId'],
                         'status': game['gameStatusText'],
-                        'date': game['gameEt'],  # Changed from gameTimeEastern to gameEt
-                        'time': game['gameStatusText'],  # Added game time
+                        'date': game['gameEt'],
+                        'time': game['gameStatusText'],
                         'home_team': {
                             'id': game['homeTeam']['teamId'],
                             'full_name': f"{game['homeTeam']['teamCity']} {game['homeTeam']['teamName']}",
@@ -59,7 +59,7 @@ class GamesAPI:
             
         except Exception as e:
             print(f"Error in get_games: {str(e)}")
-            print(f"Error details:", e.__dict__)  # Print full error details
+            print(f"Error details:", e.__dict__)
             return {
                 'live_games': [],
                 'upcoming_games': [],
