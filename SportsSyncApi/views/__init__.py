@@ -1,7 +1,7 @@
 from .users import UserViewSet
 from .news import NewsAPIView
 from .dashboard import NBAHomeView
-from .games import GamesAPI
+from .games import GamesAPI, GameDetailsView, HistoricalMatchupsView, GamesView, GamesScheduleView
 from .teams import TeamsAPI
 # from .teams import TeamsAPI, TeamListView, TeamProfileView
 from .teamlist import TeamListView, TeamDetailView
@@ -14,7 +14,9 @@ __all__ = [
     'GamesAPI',
     'TeamsAPI',
     'PlayerListView',
-    'PlayerProfileView',
-    'TeamListView',
-    'TeamProfileView'
+    'PlayerProfileView'
+    'GameDetailsView',
+    'HistoricalMatchupsView',
+    'GamesView'
+    'GamesScheduleView'
 ]

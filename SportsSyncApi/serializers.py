@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import TeamListTeam, TeamListPlayer
+from .models.game import Game
+
 
 class PlayerListSerializer(serializers.Serializer):
     player_id = serializers.IntegerField()
@@ -80,3 +82,8 @@ class TeamListTeamSerializer(serializers.ModelSerializer):
             'conference', 'division', 'wins', 'losses', 
             'players'
         ]
+
+    class GameSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Game
+            fields = '__all__'
