@@ -4,15 +4,11 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-x9yg09-pv69(#mz@!n(1&c_rxvks#3*v&#vx!%t39p(n(f0gbb'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Allow all hosts in development
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -27,9 +23,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'SportsSyncApi',
 ]
-
-# Override custom user model
-AUTH_USER_MODEL = 'auth.User'
 
 # REST Framework settings
 REST_FRAMEWORK = {
@@ -52,11 +45,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_ALL_ORIGINS = True  # For development only
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-    'OPTIONS'
-]
+CORS_ALLOW_METHODS = ['GET', 'POST', 'OPTIONS']
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -72,9 +61,9 @@ CORS_ALLOW_HEADERS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Make sure this is before CommonMiddleware
+    'corsheaders.middleware.CorsMiddleware',  # Ensure this is before CommonMiddleware
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',  # Important for CSRF protection
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -100,7 +89,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SportsSyncProject.wsgi.application'
 
-# Database
+# Database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -147,3 +136,5 @@ CACHES = {
         'TIMEOUT': 300,  # 5 minutes cache
     }
 }
+# Check if pandas is installed
+import pandas as pd
