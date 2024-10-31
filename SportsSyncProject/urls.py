@@ -5,6 +5,8 @@ from SportsSyncApi.views import (
     NBAHomeView,
     PlayerListView,
     PlayerProfileView,
+    TeamListView,
+    TeamDetailView
 )
 
 urlpatterns = [
@@ -21,4 +23,8 @@ urlpatterns = [
     # Player endpoints
     path('api/players/', PlayerListView.as_view(), name='player-list'),
     path('api/players/<int:player_id>/', PlayerProfileView.as_view(), name='player-detail'),
+
+    # Team endpoints
+    path('api/teams/', TeamListView.as_view(), name='team-list'),
+    path('api/teams/<int:team_id>/', TeamDetailView.as_view(), name='team-detail'),
 ]
