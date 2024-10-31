@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from .models import TeamListTeam, TeamListPlayer
 
 class PlayerListSerializer(serializers.Serializer):
     player_id = serializers.IntegerField()
@@ -59,3 +60,23 @@ class PlayerDetailSerializer(serializers.Serializer):
     blk = serializers.IntegerField(source='BLK')
     pts = serializers.IntegerField(source='PTS')
     plus_minus = serializers.FloatField(source='PLUS_MINUS')
+
+class TeamListPlayerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeamListPlayer
+        fields = [
+            'player_id', 'first_name', 'last_name', 
+            'jersey_number', 'position', 'age', 'gp',
+            'min', 'pts', 'reb', 'ast', 'stl', 'blk'
+        ]
+
+class TeamListTeamSerializer(serializers.ModelSerializer):
+    players = TeamListPlayerSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = TeamListTeam
+        fields = [
+            'team_id', 'full_name', 'abbreviation', 
+            'conference', 'division', 'wins', 'losses', 
+            'players'
+        ]

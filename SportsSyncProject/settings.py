@@ -138,3 +138,6 @@ CACHES = {
 }
 # Check if pandas is installed
 import pandas as pd
+
+# balldontlie API key
+BALLDONTLIE_API_KEY = 'b81b0bea-7ecc-4760-a3f7-d2a42e0413b4'
