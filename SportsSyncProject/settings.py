@@ -141,3 +141,7 @@ import pandas as pd
 
 # balldontlie API key
 BALLDONTLIE_API_KEY = 'b81b0bea-7ecc-4760-a3f7-d2a42e0413b4'
+
+# Cache timeouts
+GAME_CACHE_TIMEOUT = 60 * 5  # 5 minutes
+STATS_CACHE_TIMEOUT = 60 * 60  # 1 hour
