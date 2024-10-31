@@ -1,10 +1,12 @@
+# views/teams.py
+import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from nba_api.stats.endpoints import leaguestandings
-from .utils import get_custom_headers
+from django.conf import settings
+from nba_api.stats.endpoints import LeagueStandings
 
-class TeamsAPI(APIView):
+class TeamsAPI:
     @staticmethod
     def get_standings():
         """Get current NBA standings"""
