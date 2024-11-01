@@ -43,9 +43,22 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True  # For development only
+# Since you're in development, we'll keep this true, but remove in production
+CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = ['GET', 'POST', 'OPTIONS']
+
+# Updated to include all necessary methods
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+# Updated headers to include all necessary ones
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -56,19 +69,23 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+    'cache-control',
+    'pragma'
 ]
 
+# Middleware - order is important
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Must be as high as possible
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Ensure this is before CommonMiddleware
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',  # Important for CSRF protection
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Rest of your settings remain the same
 ROOT_URLCONF = 'SportsSyncProject.urls'
 
 TEMPLATES = [
@@ -89,7 +106,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SportsSyncProject.wsgi.application'
 
-# Database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -97,7 +113,6 @@ DATABASES = {
     }
 }
 
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -113,22 +128,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 
-# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# News API key
+# API Keys and Cache settings
 NEWS_API_KEY = '2e72051e36f041af95d98034f67bd0b6'
 
-# Cache settings for NBA API
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -136,10 +147,10 @@ CACHES = {
         'TIMEOUT': 300,  # 5 minutes cache
     }
 }
+
 # Check if pandas is installed
 import pandas as pd
 
-# balldontlie API key
 BALLDONTLIE_API_KEY = 'b81b0bea-7ecc-4760-a3f7-d2a42e0413b4'
 
 # Cache timeouts
