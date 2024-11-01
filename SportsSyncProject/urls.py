@@ -13,6 +13,8 @@ from SportsSyncApi.views import (
     GameDetailsView,
 )
 from SportsSyncApi.views.gamedetails import GameList, GameDetails  # Separate import for new game views
+from SportsSyncApi.views.favorite_teams import FavoriteTeamView
+
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -42,4 +44,8 @@ urlpatterns = [
     # Game endpoints - Updated to use api prefix for consistency
     path('api/games/', GameList.as_view(), name='game-list'),
     path('api/games/<str:game_id>/', GameDetails.as_view(), name='game-details'),
+
+    # Favorite team endpoints
+    path('api/favorites/teams/', FavoriteTeamView.as_view(), name='favorite-teams'),
+    path('api/favorites/teams/<int:team_id>/', FavoriteTeamView.as_view(), name='favorite-team-detail'),
 ]

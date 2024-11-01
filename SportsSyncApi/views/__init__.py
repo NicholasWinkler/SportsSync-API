@@ -6,6 +6,7 @@ from .gamedetails import GameDetails, GameList
 from .teams import TeamsAPI
 from .teamlist import TeamListView, TeamDetailView
 from .players import PlayerProfileView, PlayerListView
+from .favorite_teams import FavoriteTeamView
 
 __all__ = [
     'UserViewSet',
